@@ -1,0 +1,2540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Computer Engineering student exploring robotics, embedded systems, automation and autonomous systems through hands-on projects.">
+  <meta property="og:title" content="Siddhant Hirave — Computer Engineering Student">
+  <meta property="og:description" content="Computer Engineering student exploring robotics, embedded systems, automation and autonomous systems through hands-on projects.">
+  <meta property="og:type" content="website">
+  <title>Siddhant Hirave — Computer Engineering Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════
+       COLOR TOKENS — DUAL THEME
+    ═══════════════════════════════════════ */
+    :root {
+      color-scheme: dark light;
+      
+      /* DARK THEME */
+      --bg-dark:           #09090b;
+      --bg-1-dark:         #111113;
+      --bg-2-dark:         #18181b;
+      --ink-dark:          #ede9e0;
+      --ink-2-dark:        #a09b92;
+      --ink-3-dark:        #65625c;
+      --accent-dark:       #bf5f2b;
+      
+      /* LIGHT THEME */
+      --bg-light:          #faf8f5;
+      --bg-1-light:        #f5f3f0;
+      --bg-2-light:        #ede9e0;
+      --ink-light:         #1a1714;
+      --ink-2-light:       #4a4540;
+      --ink-3-light:       #7a7570;
+      --accent-light:      #bf5f2b;
+      
+      /* CURRENT (SET BY SCRIPT) */
+      --bg:           var(--bg-dark);
+      --bg-1:         var(--bg-1-dark);
+      --bg-2:         var(--bg-2-dark);
+      --ink:          var(--ink-dark);
+      --ink-2:        var(--ink-2-dark);
+      --ink-3:        var(--ink-3-dark);
+      --accent:       var(--accent-dark);
+      
+      --line:         #232325;
+      --line-2:       #2e2e31;
+      --radius:       3px;
+      --serif:   'Source Serif 4', Georgia, serif;
+      --sans:    'Space Grotesk', system-ui, sans-serif;
+      --mono:    'IBM Plex Mono', 'SFMono-Regular', monospace;
+      --ease-out: cubic-bezier(.16,1,.3,1);
+      --ease-smooth: cubic-bezier(.4,.0,.2,1);
+      --t: .22s;
+    }
+
+    html[data-theme="light"] {
+      --bg:           var(--bg-light);
+      --bg-1:         var(--bg-1-light);
+      --bg-2:         var(--bg-2-light);
+      --ink:          var(--ink-light);
+      --ink-2:        var(--ink-2-light);
+      --ink-3:        var(--ink-3-light);
+      --accent:       var(--accent-light);
+      --line:         #e8e4dd;
+      --line-2:       #dcd8d1;
+      --serif:        'Georgia', 'Iowan Old Style', 'Times New Roman', serif;
+      --sans:         'Avenir Next', 'Segoe UI', 'Poppins', 'Space Grotesk', system-ui, sans-serif;
+      --mono:         'SFMono-Regular', 'Consolas', 'IBM Plex Mono', monospace;
+    }
+
+    /* ═══════════════════════════════════════
+       RESET + BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      transition: background .4s var(--ease-smooth), color .4s var(--ease-smooth);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: var(--bg);
+      transition: background .4s var(--ease-smooth);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    html[data-theme="dark"] body::after {
+      background: transparent;
+    }
+
+    html[data-theme="light"] body::after {
+      background: transparent;
+    }
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at top left, rgba(245, 161, 99, 0.24), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(191, 95, 43, 0.12), transparent 30%),
+        linear-gradient(135deg, #fffdf8 0%, #f8f1e7 100%);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    html[data-theme="light"] .nav {
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid rgba(125, 90, 58, 0.12);
+      box-shadow: 0 10px 26px rgba(76, 51, 19, 0.05);
+      backdrop-filter: blur(16px);
+    }
+
+    html[data-theme="light"] .nav-link,
+    html[data-theme="light"] .nav-brand,
+    html[data-theme="light"] .hero-name,
+    html[data-theme="light"] .hero-role,
+    html[data-theme="light"] .section-title,
+    html[data-theme="light"] .project-card h3,
+    html[data-theme="light"] .about-text p,
+    html[data-theme="light"] .contact-heading,
+    html[data-theme="light"] .edu-school,
+    html[data-theme="light"] .club-right h3 {
+      font-family: var(--serif);
+    }
+
+    html[data-theme="light"] .hero-name {
+      letter-spacing: -0.05em;
+      text-shadow: 0 10px 25px rgba(191, 95, 43, 0.12);
+    }
+
+    html[data-theme="light"] .hero-role,
+    html[data-theme="light"] .hero-statement,
+    html[data-theme="light"] .project-desc,
+    html[data-theme="light"] .club-desc,
+    html[data-theme="light"] .about-text p,
+    html[data-theme="light"] .contact-sub {
+      font-family: var(--sans);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    html[data-theme="light"] .sim-panel,
+    html[data-theme="light"] .project-card,
+    html[data-theme="light"] .club-block,
+    html[data-theme="light"] .skill-col,
+    html[data-theme="light"] .edu-block,
+    html[data-theme="light"] .contact-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(126, 96, 69, 0.12);
+      box-shadow: 0 18px 35px rgba(112, 82, 50, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    html[data-theme="light"] .project-card:hover,
+    html[data-theme="light"] .contact-card:hover,
+    html[data-theme="light"] .skill-col:hover,
+    html[data-theme="light"] .club-block:hover,
+    html[data-theme="light"] .edu-block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 40px rgba(112, 82, 50, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+      border-color: rgba(191, 95, 43, 0.3);
+    }
+
+    html[data-theme="light"] .btn,
+    html[data-theme="light"] .btn-accent {
+      box-shadow: 0 10px 18px rgba(191, 95, 43, 0.14);
+    }
+
+    html[data-theme="light"] .btn-accent {
+      background: linear-gradient(135deg, rgba(191,95,43,0.96), rgba(221,120,53,0.9));
+      color: #fffaf5;
+    }
+
+    body {
+      --spotlight-x: 50%;
+      --spotlight-y: 50%;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: transparent;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+
+    body.is-loaded::before {
+      opacity: 0;
+    }
+
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(7, 8, 10, 0.96);
+      z-index: 999;
+      transition: opacity .8s ease, visibility .8s ease;
+      overflow: hidden;
+    }
+
+    .loading-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(191,95,43,.11), transparent 30%);
+    }
+
+    .loading-screen::after {
+      content: '';
+      position: absolute;
+      inset: 12% 18%;
+      border: 1px solid rgba(255,255,255,.04);
+      border-radius: 999px;
+      opacity: .5;
+    }
+
+    .loading-core {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191,95,43,.12), transparent 60%);
+    }
+
+    .loading-signal {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e38d51;
+      box-shadow: 0 0 0 0 rgba(227,141,81,0.65);
+      animation: signalPulse 1.6s ease-out infinite;
+    }
+
+    .loading-signal::before,
+    .loading-signal::after {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border: 1px solid rgba(227,141,81,0.2);
+      border-radius: 50%;
+      animation: signalRing 1.8s ease-out infinite;
+    }
+
+    .loading-signal::after {
+      animation-delay: .5s;
+    }
+
+    body.is-loaded .loading-screen {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, rgba(191,95,43,0.16), transparent 28%),
+        rgba(8, 9, 12, 0.96);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .9s ease, visibility .9s ease;
+      pointer-events: none;
+    }
+
+    .intro-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .intro-overlay.is-finished {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro-word-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: .38em;
+      font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+      color: rgba(255,255,255,0.66);
+      transform: translateY(18px);
+      opacity: 0;
+      animation: introFadeIn 1.2s var(--ease-out) forwards 0.1s;
+    }
+
+    .intro-word {
+      display: block;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 0 34px rgba(191,95,43,0.42);
+    }
+
+    .intro-word-alt {
+      color: rgba(227,141,81,0.95);
+    }
+
+    .intro-line {
+      width: 110px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.66), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      animation: introLine 1s ease-out forwards 0.5s;
+    }
+
+    .page-shell {
+      opacity: 0;
+      transform: translateY(22px);
+      filter: blur(8px);
+      transition: opacity .9s var(--ease-out), transform .9s var(--ease-out), filter .9s var(--ease-out);
+    }
+
+    body.is-loaded .page-shell {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    @keyframes signalPulse {
+      0% { box-shadow: 0 0 0 0 rgba(227,141,81,0.6); opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { box-shadow: 0 0 0 18px rgba(227,141,81,0); opacity: 0.7; }
+    }
+
+    @keyframes signalRing {
+      0% { transform: scale(0.7); opacity: 0.7; }
+      70% { opacity: 0; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    @keyframes introFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes introLine {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    .hero {
+      position: relative;
+      padding-top: 42px;
+      padding-bottom: 64px;
+    }
+
+    .hero-shell {
+      position: relative;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 18px 18px 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      background: rgba(10,11,12,0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    html[data-theme="light"] .hero-shell {
+      background: rgba(255,255,255,0.52);
+      border-color: rgba(110, 86, 71, 0.12);
+      box-shadow: 0 25px 50px rgba(88, 64, 42, 0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .hero-window-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 52px;
+      padding: 0 18px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .hero-view-tabs {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      min-width: 186px;
+      position: relative;
+      z-index: 1;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 22px rgba(0,0,0,0.12);
+    }
+
+    .hero-view-tab {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+      color: var(--ink-3);
+      border: none;
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color .25s ease, transform .25s ease, text-shadow .25s ease;
+    }
+
+    .hero-view-tab:hover {
+      color: var(--ink-2);
+      transform: translateY(-1px);
+    }
+
+    .hero-view-tab.is-active {
+      color: var(--ink);
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+      box-shadow: 0 10px 22px rgba(191, 95, 43, 0.18), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 12px rgba(255,255,255,0.45);
+      animation: workInfoPulse 2.2s ease-in-out infinite;
+    }
+
+    .hero-view-tab.is-active::before {
+      content: '';
+      position: absolute;
+      inset: -7px;
+      border-radius: 999px;
+      border: 1px solid rgba(227, 141, 81, 0.9);
+      box-shadow: 0 0 0 1px rgba(227, 141, 81, 0.25), 0 0 18px rgba(227, 141, 81, 0.32);
+      pointer-events: none;
+      animation: workInfoRing 2.2s ease-in-out infinite;
+    }
+
+    @keyframes workInfoPulse {
+      0%, 100% { box-shadow: 0 10px 22px rgba(191, 95, 43, 0.18), inset 0 1px 0 rgba(255,255,255,0.3); }
+      50% { box-shadow: 0 14px 30px rgba(191, 95, 43, 0.26), inset 0 1px 0 rgba(255,255,255,0.35), 0 0 18px rgba(227, 141, 81, 0.22); }
+    }
+
+    @keyframes workInfoRing {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    .hero-links {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+
+    .hero-links a {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--ink-2);
+      letter-spacing: .03em;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+      padding: 28px 22px 18px;
+      overflow: hidden;
+    }
+
+    .hero-panel {
+      position: absolute;
+      inset: 28px 22px 18px;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      transform: translateY(12px) scale(.98);
+      transition: opacity .4s ease, transform .45s ease;
+      pointer-events: none;
+    }
+
+    .hero-panel.is-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .hero-panel-inner {
+      max-width: 760px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .hero-panel .hero-name {
+      font-size: clamp(3.2rem, 6vw, 7rem);
+      line-height: .92;
+      letter-spacing: -.065em;
+      margin: 0 0 18px;
+    }
+
+    .hero-panel .hero-role {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-panel .hero-statement {
+      max-width: 680px;
+      margin: 0 auto 24px;
+      font-size: 1rem;
+    }
+
+    .hero-scroll-indicator {
+      margin-top: 18px;
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-2);
+      animation: floatDot 2.2s ease-in-out infinite;
+    }
+
+    .hero-scroll-indicator::before {
+      content: '↓';
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 720px) {
+      .hero-shell { padding: 10px 10px 14px; border-radius: 22px; }
+      .hero-window-bar {
+        padding: 4px 12px 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .window-controls, .hero-links { flex: auto; justify-content: center; }
+      .hero-links { gap: 10px; }
+      .hero-stage { min-height: 360px; }
+      .hero-panel { inset: 16px 12px 10px; }
+      .hero-panel .hero-name { font-size: clamp(2.75rem, 12vw, 4.2rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .loading-signal,
+      .loading-signal::before,
+      .loading-signal::after,
+      .hero-scroll-indicator,
+      .hero-panel,
+      .nav-center::before,
+      .nav-center a,
+      .project-card,
+      .contact-card,
+      .btn,
+      .sim-panel {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ═══════════════════════════════════════
+       SCROLL PROGRESS BAR
+    ═══════════════════════════════════════ */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 200;
+      transition: width .1s linear;
+    }
+
+    /* ═══════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════ */
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+    @media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+    /* ═══════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { r: 3px; opacity: 1; }
+      50% { r: 4.5px; opacity: 0.6; }
+    }
+
+    @keyframes flowTrace {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    @keyframes floatDot {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes gridDraw {
+      0% { opacity: 0; }
+      100% { opacity: 0.5; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeInUp .6s var(--ease-out) forwards;
+    }
+    .reveal-delay-1 { animation-delay: .08s; }
+    .reveal-delay-2 { animation-delay: .16s; }
+    .reveal-delay-3 { animation-delay: .24s; }
+    .reveal-delay-4 { animation-delay: .32s; }
+
+    .stagger-1 { animation: fadeInUp .6s var(--ease-out) .0s forwards; opacity: 0; }
+    .stagger-2 { animation: fadeInUp .6s var(--ease-out) .08s forwards; opacity: 0; }
+    .stagger-3 { animation: fadeInUp .6s var(--ease-out) .16s forwards; opacity: 0; }
+    .stagger-4 { animation: fadeInUp .6s var(--ease-out) .24s forwards; opacity: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3, .reveal-delay-4,
+      .stagger-1, .stagger-2, .stagger-3, .stagger-4 {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9,9,11,.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: border-color .3s ease, background .4s var(--ease-smooth);
+    }
+
+    html[data-theme="light"] .nav {
+      background: rgba(250,248,245,.85);
+    }
+
+    body.scrolled .nav {
+      border-bottom-color: var(--line-2);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: .95rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: .01em;
+    }
+
+    .nav-center {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      list-style: none;
+      padding: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 12px 22px rgba(0,0,0,0.06);
+      --indicator-width: 0px;
+      --indicator-x: 0px;
+    }
+
+    .nav-center::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      width: var(--indicator-width);
+      height: calc(100% - 14px);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.08);
+      transform: translateX(var(--indicator-x));
+      transition: transform .38s cubic-bezier(.22,1,.36,1), width .38s cubic-bezier(.22,1,.36,1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    html[data-theme="light"] .nav-center {
+      background: rgba(255,255,255,0.52);
+      border-color: rgba(120, 92, 61, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 12px 22px rgba(84,60,40,0.04);
+    }
+
+    html[data-theme="light"] .nav-center::before {
+      background: rgba(20,20,20,0.04);
+      border-color: rgba(120, 92, 61, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 8px 20px rgba(84,60,40,0.05);
+    }
+
+    .nav-center li { position: relative; z-index: 1; }
+    .nav-center a {
+      position: relative;
+      z-index: 1;
+      padding: 10px 15px;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.62);
+      transition: color var(--t), transform .2s ease, font-weight var(--t);
+      letter-spacing: .02em;
+      display: block;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-center a:hover { color: rgba(255,255,255,0.82); transform: translateY(-1px); }
+    .nav-center a.active {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    html[data-theme="light"] .nav-center a {
+      color: rgba(26,23,20,0.62);
+    }
+
+    html[data-theme="light"] .nav-center a:hover {
+      color: rgba(26,23,20,0.82);
+    }
+
+    .nav-end {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-2);
+      transition: border-color var(--t), color var(--t), background .4s var(--ease-smooth);
+      font-size: .9rem;
+    }
+    .theme-toggle:hover { border-color: var(--ink-3); color: var(--ink); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      padding: 7px 9px;
+      cursor: pointer;
+      color: var(--ink-2);
+      line-height: 1;
+      gap: 4px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: border-color var(--t), color var(--t);
+    }
+    .nav-toggle:hover { border-color: var(--ink-3); color: var(--ink); }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform .3s var(--ease-out), opacity .3s var(--ease-out);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      padding: 8px 0 16px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      padding: 12px 20px;
+      transition: color var(--t), background var(--t);
+    }
+    .nav-mobile a:hover { color: var(--ink); background: var(--accent-dim); }
+
+    @media (max-width: 840px) {
+      .nav-center { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION SHELL
+    ═══════════════════════════════════════ */
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: border-bottom-color .4s var(--ease-smooth);
+    }
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--line-2) 50%, transparent 100%);
+      opacity: 0;
+      animation: fadeInUp .8s var(--ease-out) .2s forwards;
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+      animation: pulseNode 2s ease-in-out infinite;
+    }
+
+    h2.section-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 44px;
+      color: var(--ink);
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 56px 0; }
+      h2.section-title { font-size: 1.5rem; margin-bottom: 32px; }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-bg svg {
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(480px, 52vw);
+      height: auto;
+      opacity: .35;
+      transition: opacity .4s var(--ease-smooth);
+    }
+
+    html[data-theme="light"] .hero-bg svg {
+      opacity: .25;
+    }
+
+    /* ═══════════════════════════════════════
+       LIVE SENSOR SIMULATION — HERO
+    ═══════════════════════════════════════ */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+    }
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    .sim-panel {
+      position: relative;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      animation: fadeInUp .7s var(--ease-out) .3s forwards;
+      opacity: 0;
+      transition: border-color .4s var(--ease-smooth), background .4s var(--ease-smooth);
+    }
+
+    .sim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--ink-3);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .sim-header-title { display: flex; align-items: center; gap: 7px; }
+
+    .sim-live-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    .sim-canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+    }
+
+    #simCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .sim-readout {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .sim-sensor-cell {
+      background: var(--bg-1);
+      padding: 8px 4px;
+      text-align: center;
+      transition: background .15s ease;
+    }
+
+    .sim-sensor-bar-track {
+      height: 3px;
+      background: var(--line-2);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    .sim-sensor-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width .08s linear;
+      border-radius: 2px;
+    }
+
+    .sim-sensor-label {
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: var(--ink-3);
+      letter-spacing: .04em;
+    }
+
+    .sim-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 14px;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: .66rem;
+      color: var(--ink-3);
+    }
+
+    .sim-footer-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sim-reset-btn {
+      background: transparent;
+      border: 1px solid var(--line-2);
+      color: var(--ink-2);
+      font-family: var(--mono);
+      font-size: .64rem;
+      padding: 4px 9px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: border-color .18s ease, color .18s ease;
+    }
+    .sim-reset-btn:hover { border-color: var(--ink-3); color: var(--ink); }
+    .sim-reset-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    @media (max-width: 640px) {
+      .sim-sensor-label { display: none; }
+    }
+
+    .hero-trace-line {
+      stroke-dasharray: 500;
+      stroke-dashoffset: 500;
+    }
+
+    html[data-theme="dark"] .hero-trace-line {
+      animation: flowTrace 8s linear infinite;
+    }
+
+    html[data-theme="light"] .hero-trace-line {
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+    }
+
+    .hero-pulse-node {
+      animation: pulseNode 2.5s ease-in-out infinite;
+    }
+
+    .hero-float-dot {
+      animation: floatDot 3s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 560px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+
+    .hero-status {
+      font-family: var(--mono);
+      font-size: .63rem;
+      color: var(--ink-3);
+      letter-spacing: .08em;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      max-width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(227,141,81,0.26);
+      background: rgba(227,141,81,0.04);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      animation: fadeInUp .6s var(--ease-out) .04s forwards;
+      opacity: 0;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(227,141,81,0.6);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    h1.hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+      color: var(--ink);
+      animation: fadeInUp .6s var(--ease-out) .08s forwards;
+      opacity: 0;
+    }
+
+    .hero-role {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      margin-bottom: 16px;
+      animation: fadeInUp .6s var(--ease-out) .12s forwards;
+      opacity: 0;
+    }
+
+    .hero-statement {
+      font-size: .95rem;
+      color: var(--ink-3);
+      line-height: 1.72;
+      max-width: 52ch;
+      margin-bottom: 30px;
+      animation: fadeInUp .6s var(--ease-out) .16s forwards;
+      opacity: 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 36px;
+      animation: fadeInUp .6s var(--ease-out) .2s forwards;
+      opacity: 0;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .82rem;
+      color: var(--ink-3);
+    }
+
+    .pip {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 18px auto 20px;
+      animation: fadeInUp .6s var(--ease-out) .24s forwards;
+      opacity: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      font-family: var(--sans);
+      font-size: .88rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid var(--line-2);
+      color: var(--ink-2);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color var(--t), color var(--t), background .4s var(--ease-smooth), transform .2s var(--ease-out);
+      text-decoration: none;
+      letter-spacing: .01em;
+      position: relative;
+    }
+
+    .btn:hover {
+      border-color: var(--ink-3);
+      color: var(--ink);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0e0600;
+      font-weight: 600;
+    }
+
+    .btn-accent:hover {
+      background: #ce6b33;
+      border-color: #ce6b33;
+      color: #0e0600;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      background: radial-gradient(circle at 30% 30%, rgba(191,95,43,.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+
+    .btn:hover::after { opacity: 1; }
+
+    .btn-icon {
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 52px; }
+      .hero-bg svg { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════ */
+    .projects-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .3s ease, background .3s ease, transform .3s var(--ease-out), box-shadow .3s ease;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--line-2);
+      background: var(--bg-2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(191,95,43,.08);
+    }
+
+    .project-inner {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      min-height: 200px;
+    }
+
+    .project-inner.reverse { grid-template-columns: 220px 1fr; }
+    .project-inner.reverse .project-vis { order: -1; }
+
+    @media (max-width: 720px) {
+      .project-inner,
+      .project-inner.reverse { grid-template-columns: 1fr; }
+      .project-inner.reverse .project-vis { order: 0; }
+    }
+
+    .project-body {
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    @media (max-width: 640px) { .project-body { padding: 22px 20px; } }
+
+    .project-num {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+
+    .project-card h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .project-kind {
+      font-size: .8rem;
+      color: var(--ink-3);
+      margin-bottom: 14px;
+    }
+
+    .project-desc {
+      font-size: .88rem;
+      color: var(--ink-2);
+      line-height: 1.72;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: .72rem;
+      padding: 3px 8px;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      color: var(--ink-3);
+      background: var(--bg);
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim, rgba(191,95,43,.08));
+    }
+
+    .project-detail {
+      font-size: .82rem;
+      color: var(--ink-3);
+      line-height: 1.65;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .project-detail strong {
+      color: var(--ink-2);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .project-link-row {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: .82rem;
+    }
+
+    .project-link-row a {
+      color: var(--ink-2);
+      font-weight: 500;
+      transition: color .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-link-row a:hover {
+      color: var(--accent);
+    }
+
+    .project-link-row a::after {
+      content: '→';
+      display: inline-block;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .project-link-row a:hover::after {
+      transform: translateX(3px);
+    }
+
+    .project-vis {
+      background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-1) 100%);
+      border-left: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: transform .4s var(--ease-out);
+    }
+
+    .project-card:hover .project-vis {
+      transform: scale(1.03);
+    }
+
+    .project-inner.reverse .project-vis {
+      border-left: none;
+      border-right: 1px solid var(--line);
+    }
+
+    @media (max-width: 720px) {
+      .project-vis {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding: 20px;
+        min-height: 140px;
+      }
+      .project-inner.reverse .project-vis {
+        border-right: none;
+        border-top: 1px solid var(--line);
+      }
+      .project-card:hover .project-vis {
+        transform: none;
+      }
+    }
+
+    .project-vis svg {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+    }
+
+    /* ═══════════════════════════════════════
+       ROBOTICS CLUB
+    ═══════════════════════════════════════ */
+    .club-block {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+      transition: border-color .3s ease;
+    }
+
+    .club-block:hover { border-color: var(--line-2); }
+
+    .club-left {
+      background: var(--bg-1);
+      border-right: 1px solid var(--line);
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: background .3s ease;
+    }
+
+    .club-block:hover .club-left {
+      background: var(--bg-1);
+    }
+
+    .club-left .club-icon {
+      display: none;
+    }
+
+    .club-left-label {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--ink-3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .club-right {
+      background: var(--bg-1);
+      padding: 28px 30px;
+      transition: background .3s ease;
+    }
+
+    .club-block:hover .club-right { background: var(--bg-2); }
+
+    .club-right h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .club-meta {
+      font-size: .8rem;
+      color: var(--ink-3);
+      margin-bottom: 12px;
+    }
+
+    .club-desc {
+      font-size: .88rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+
+    @media (max-width: 560px) {
+      .club-block { grid-template-columns: 1fr; }
+      .club-left { border-right: none; border-bottom: 1px solid var(--line); padding: 20px; flex-direction: row; gap: 12px; }
+      .club-left .club-icon { margin-bottom: 0; font-size: 1.2rem; }
+    }
+
+    /* ═══════════════════════════════════════
+       SKILLS
+    ═══════════════════════════════════════ */
+    .skills-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+
+    @media (max-width: 720px) { .skills-cols { grid-template-columns: 1fr; } }
+
+    .skill-col {
+      padding: 28px;
+      background: var(--bg-1);
+      border-right: 1px solid var(--line);
+      transition: background .3s ease;
+    }
+
+    .skill-col:last-child { border-right: none; }
+    .skill-col:hover { background: var(--bg-2); }
+
+    @media (max-width: 720px) {
+      .skill-col { border-right: none; border-bottom: 1px solid var(--line); }
+      .skill-col:last-child { border-bottom: none; }
+    }
+
+    .skill-col-label {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .skill-list li {
+      font-family: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+      font-size: .83rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .skill-list li:hover {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .skill-list li::before {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--line-2);
+      flex-shrink: 0;
+      transition: background .2s ease;
+    }
+
+    .skill-list li:hover::before { background: var(--accent); }
+
+    /* ═══════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════ */
+    .about-wrapper {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .about-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .about-text {
+      max-width: 64ch;
+      font-size: .95rem;
+      color: var(--ink-2);
+      line-height: 1.78;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+
+    .about-text p + p { margin-top: 14px; }
+
+    .about-visual {
+      animation: fadeInUp .6s var(--ease-out) .1s forwards;
+      opacity: 0;
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--ink-3);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .about-loop {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .about-loop div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .about-loop-arrow {
+      color: var(--accent);
+      font-size: .6rem;
+    }
+
+    /* ═══════════════════════════════════════
+       EDUCATION
+    ═══════════════════════════════════════ */
+    .edu-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding: 28px 30px;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+      transition: border-color .3s ease, background .3s ease;
+    }
+
+    .edu-block:hover {
+      border-color: var(--line-2);
+      background: var(--bg-2);
+    }
+
+    @media (max-width: 560px) { .edu-block { grid-template-columns: 1fr; } }
+
+    .edu-school {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .edu-sub {
+      font-size: .83rem;
+      color: var(--ink-3);
+      margin-bottom: 14px;
+    }
+
+    .edu-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: .72rem;
+      padding: 3px 9px;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      color: var(--ink-3);
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--ink-2);
+      color: var(--ink-2);
+    }
+
+    .chip-accent {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .chip-accent:hover {
+      border-color: #ce6b33;
+      color: #ce6b33;
+      background: var(--accent-dim, rgba(191,95,43,.08));
+    }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--ink);
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+
+    .contact-sub {
+      font-size: .93rem;
+      color: var(--ink-3);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeInUp .6s var(--ease-out) .08s forwards;
+      opacity: 0;
+    }
+
+    .contact-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) { .contact-links { grid-template-columns: 1fr; } }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-1);
+      transition: border-color .3s ease, background .3s ease, transform .3s var(--ease-out);
+      text-decoration: none;
+      animation: fadeInUp .6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+
+    .contact-card:nth-child(1) { animation-delay: .16s; }
+    .contact-card:nth-child(2) { animation-delay: .24s; }
+    .contact-card:nth-child(3) { animation-delay: .32s; }
+
+    .contact-card:hover {
+      border-color: var(--line-2);
+      background: var(--bg-2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(191,95,43,.12);
+    }
+
+    .contact-card-label {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--ink-3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .contact-card-value {
+      font-size: .88rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .contact-card-arrow {
+      font-size: .8rem;
+      color: var(--accent);
+      margin-top: 4px;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .contact-card:hover .contact-card-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    .footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      transition: border-top-color .4s var(--ease-smooth);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .78rem;
+      color: var(--ink-3);
+    }
+
+    .footer-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-status-dot {
+      width: 2px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    .footer-links { display: flex; gap: 20px; }
+
+    .footer-links a {
+      color: var(--ink-3);
+      transition: color var(--t);
+    }
+
+    .footer-links a:hover { color: var(--ink-2); }
+
+  </style>
+</head>
+<body data-theme="dark">
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="intro-overlay" id="introOverlay" aria-hidden="true">
+    <div class="intro-word-wrap">
+      <span class="intro-word">Siddhant</span>
+      <span class="intro-word intro-word-alt">Hirave</span>
+      <span class="intro-line"></span>
+    </div>
+  </div>
+
+  <div class="page-shell">
+    <!-- ══════════ NAV ══════════ -->
+    <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <span class="nav-brand">Siddhant Hirave</span>
+      <ul class="nav-center" id="navCenter" role="list">
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="Siddhant_Hirave_Resume.pdf" class="nav-link" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-end">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-mobile" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="Siddhant_Hirave_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+    </nav>
+
+    <main>
+
+    <!-- ══════════ HERO ══════════ -->
+    <header class="hero">
+      <div class="hero-shell">
+        <div class="hero-window-bar">
+          <div class="hero-view-tabs" role="tablist" aria-label="Portfolio views">
+            <button class="hero-view-tab is-active" type="button" data-panel="work" role="tab" aria-selected="true">Work</button>
+            <button class="hero-view-tab" type="button" data-panel="info" role="tab" aria-selected="false">Info</button>
+          </div>
+        </div>
+
+        <div class="hero-stage">
+          <div class="hero-panel is-active" data-panel="work">
+            <div class="hero-panel-inner">
+              <div class="hero-eyebrow">Engineering Portfolio</div>
+              <h1 class="hero-name">Siddhant Hirave</h1>
+              <p class="hero-role">Computer Engineering Student</p>
+              <div class="hero-status">
+                <span>[ SYSTEM STATUS ]</span>
+                <span class="status-dot"></span>
+                <span>BUILDING · TESTING · ITERATING</span>
+              </div>
+              <div class="btn-row">
+                <a href="https://github.com/Siddhant981" class="btn btn-accent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="Siddhant_Hirave_Resume.pdf" class="btn btn-accent" target="_blank" rel="noopener noreferrer">
+                  <span class="btn-icon">📄</span> Resume
+                </a>
+                <a href="https://www.linkedin.com/in/siddhant-hirave" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+              <p class="hero-statement">Exploring robotics, embedded systems, automation and autonomous systems through hands-on engineering.</p>
+            </div>
+          </div>
+
+          <div class="hero-panel" data-panel="info">
+            <div class="hero-panel-inner">
+              <div class="hero-eyebrow">Systems Overview</div>
+              <h1 class="hero-name">Precision<br>through testing.</h1>
+              <p class="hero-role">Robotics • Embedded Systems • Automation</p>
+              <p class="hero-statement">I build practical engineering systems, debug real hardware, and iterate through sensor, control, and automation problems until the solution is reliable.</p>
+              <div class="hero-meta">
+                <div class="hero-meta-item"><span class="pip" aria-hidden="true"></span>Arduino + C++</div>
+                <div class="hero-meta-item"><span class="pip" aria-hidden="true"></span>IoT, Sensors, Control</div>
+              </div>
+              <div class="hero-scroll-indicator" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════ PROJECTS ══════════ -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Projects</h2>
+
+        <div class="projects-grid">
+
+          <!-- 01 Line Following Robot -->
+          <article class="project-card stagger-1">
+            <div class="project-inner">
+              <div class="project-body">
+                <div class="project-num">01</div>
+                <h3>Line Following Robot</h3>
+                <p class="project-kind">Robotics Club Learning Project · Team of 8 · ~2 weeks</p>
+                <p class="project-desc">A team-based line-following robot developed as part of a Robotics Club learning and training project. The project helped the team learn how sensors, motor drivers, motors, power systems and control logic work together in a physical robotic system.</p>
+                <div class="tag-row">
+                  <span class="tag">Arduino Nano</span>
+                  <span class="tag">QTR-8RC</span>
+                  <span class="tag">TB6612FNG</span>
+                  <span class="tag">200 RPM motors</span>
+                  <span class="tag">7.4V battery</span>
+                  <span class="tag">C++</span>
+                </div>
+                <div class="project-detail">
+                  <strong>My contributions</strong>
+                  Team coordination · Component research and selection · QTR-8RC sensor reading · Sensor calibration and threshold tuning · Motor control · PWM speed control · Left/right steering logic · Testing · Troubleshooting inconsistent motor-speed behaviour
+                </div>
+                <div class="project-detail">
+                  <strong>Team approach</strong>
+                  Shared technical learning across the full team first — it was the team's first serious robotics build with members at different levels. Responsibilities became more specialised based on individual strengths as the build progressed.
+                </div>
+                <div class="project-link-row">
+                  <a href="https://github.com/Siddhant981/arduino-line-follower-robot" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                </div>
+              </div>
+              <div class="project-vis" aria-hidden="true">
+                <svg viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- sensor bar -->
+                  <rect x="20" y="10" width="120" height="20" rx="2" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+                  <text x="80" y="23" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="currentColor" opacity="0.7">QTR-8RC</text>
+                  <line x1="40" y1="30" x2="40" y2="40" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <line x1="80" y1="30" x2="80" y2="40" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <line x1="120" y1="30" x2="120" y2="40" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <!-- Arduino Nano -->
+                  <rect x="40" y="40" width="80" height="36" rx="2" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                  <text x="80" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="currentColor" opacity="0.6">Arduino Nano</text>
+                  <!-- line to driver -->
+                  <line x1="80" y1="76" x2="80" y2="96" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <!-- Motor driver -->
+                  <rect x="40" y="96" width="80" height="30" rx="2" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                  <text x="80" y="114" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="currentColor" opacity="0.6">TB6612FNG</text>
+                  <!-- left motor -->
+                  <line x1="55" y1="126" x2="40" y2="146" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <rect x="20" y="146" width="38" height="22" rx="2" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                  <text x="39" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.5">Motor L</text>
+                  <!-- right motor -->
+                  <line x1="105" y1="126" x2="120" y2="146" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <rect x="102" y="146" width="38" height="22" rx="2" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                  <text x="121" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.5">Motor R</text>
+                  <!-- wheels -->
+                  <rect x="20" y="174" width="38" height="10" rx="1" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <rect x="102" y="174" width="38" height="10" rx="1" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <text x="39" y="182" text-anchor="middle" font-family="IBM Plex Mono" font-size="5.5" fill="currentColor" opacity="0.4">200 RPM</text>
+                  <text x="121" y="182" text-anchor="middle" font-family="IBM Plex Mono" font-size="5.5" fill="currentColor" opacity="0.4">200 RPM</text>
+                  <!-- battery label -->
+                  <text x="80" y="205" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.5">7.4V battery</text>
+                  <line x1="60" y1="200" x2="100" y2="200" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 Ultrasonic Radar -->
+          <article class="project-card stagger-2">
+            <div class="project-inner reverse">
+              <div class="project-body">
+                <div class="project-num">02</div>
+                <h3>Arduino Ultrasonic Radar</h3>
+                <p class="project-kind">Individual Hardware Project</p>
+                <p class="project-desc">An Arduino-based scanning system that uses an ultrasonic sensor mounted on a servo to scan approximately 180° and detect nearby objects. Sensor readings are sent to a computer for a radar-style visualisation.</p>
+                <div class="tag-row">
+                  <span class="tag">Arduino</span>
+                  <span class="tag">Ultrasonic sensor</span>
+                  <span class="tag">Servo motor</span>
+                  <span class="tag">C++</span>
+                </div>
+                <div class="project-detail">
+                  <strong>Skills demonstrated</strong>
+                  Arduino programming · Distance sensing · Servo control · Object detection · Hardware/software integration
+                </div>
+                <div class="project-link-row">
+                  <a href="https://github.com/Siddhant981/arduino-ultrasonic-radar" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                </div>
+              </div>
+              <div class="project-vis" aria-hidden="true">
+                <svg viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- arc segments 0°–180° -->
+                  <path d="M80 110 A60 60 0 0 1 140 110" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <path d="M80 110 A45 45 0 0 1 125 110" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <path d="M80 110 A30 30 0 0 1 110 110" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <!-- outer full arc -->
+                  <path d="M20 110 A60 60 0 0 1 140 110" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <!-- radial lines -->
+                  <line x1="80" y1="110" x2="20" y2="110"  stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <line x1="80" y1="110" x2="80" y2="50"   stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <line x1="80" y1="110" x2="140" y2="110" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                  <line x1="80" y1="110" x2="38" y2="68"   stroke="currentColor" stroke-width=".8" opacity=".15"/>
+                  <line x1="80" y1="110" x2="122" y2="68"  stroke="currentColor" stroke-width=".8" opacity=".15"/>
+                  <!-- sweep line -->
+                  <line x1="80" y1="110" x2="122" y2="68" stroke="#bf5f2b" stroke-width="1.5" opacity=".7"/>
+                  <!-- detected object dot -->
+                  <circle cx="118" cy="71" r="4" fill="#bf5f2b" opacity=".5"/>
+                  <!-- servo base -->
+                  <rect x="68" y="106" width="24" height="14" rx="2" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                  <text x="80" y="116" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.5">servo</text>
+                  <!-- labels -->
+                  <text x="10" y="125" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.4">0°</text>
+                  <text x="74" y="44" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.4">90°</text>
+                  <text x="133" y="125" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.4">180°</text>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 Obstacle Detection -->
+          <article class="project-card stagger-3">
+            <div class="project-inner">
+              <div class="project-body">
+                <div class="project-num">03</div>
+                <h3>Ultrasonic Obstacle Detection</h3>
+                <p class="project-kind">Arduino / Tinkercad Simulation Project</p>
+                <p class="project-desc">A software and simulation project developed in Arduino IDE and tested in Tinkercad. The program uses ultrasonic sensing to detect obstacles from front, left and right directions and applies decision-making logic based on the simulated sensor behaviour.</p>
+                <div class="tag-row">
+                  <span class="tag">Arduino</span>
+                  <span class="tag">C++</span>
+                  <span class="tag">Ultrasonic sensor</span>
+                  <span class="tag">Tinkercad</span>
+                  <span class="tag">Arduino IDE</span>
+                </div>
+                <div class="project-detail">
+                  <strong>Work completed</strong>
+                  Wrote the Arduino code · Implemented ultrasonic sensing · Front/left/right detection logic · Decision-making logic · Tested in Tinkercad · Refined code based on simulation behaviour
+                </div>
+                <div class="project-link-row">
+                  <a href="https://github.com/Siddhant981/ultrasonic-obstacle-detection-system" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                </div>
+              </div>
+              <div class="project-vis" aria-hidden="true">
+                <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- robot body -->
+                  <rect x="50" y="60" width="60" height="50" rx="3" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                  <text x="80" y="89" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="currentColor" opacity="0.5">Arduino</text>
+                  <!-- front sensor -->
+                  <line x1="80" y1="60" x2="80" y2="28" stroke="#bf5f2b" stroke-width="1.2" opacity="0.6"/>
+                  <path d="M62 22 Q80 14 98 22" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".4"/>
+                  <path d="M68 26 Q80 20 92 26" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".2"/>
+                  <text x="80" y="12" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="#bf5f2b" opacity="0.7">FRONT</text>
+                  <!-- left sensor -->
+                  <line x1="50" y1="85" x2="20" y2="85" stroke="#bf5f2b" stroke-width="1.2" opacity="0.5"/>
+                  <path d="M24 70 Q12 85 24 100" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".3"/>
+                  <path d="M20 76 Q11 85 20 94" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".15"/>
+                  <text x="6" y="88" text-anchor="middle" font-family="IBM Plex Mono" font-size="5.5" fill="#bf5f2b" opacity="0.6">L</text>
+                  <!-- right sensor -->
+                  <line x1="110" y1="85" x2="140" y2="85" stroke="#bf5f2b" stroke-width="1.2" opacity="0.5"/>
+                  <path d="M136 70 Q148 85 136 100" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".3"/>
+                  <path d="M140 76 Q149 85 140 94" stroke="#bf5f2b" stroke-width="1" fill="none" opacity=".15"/>
+                  <text x="154" y="88" text-anchor="middle" font-family="IBM Plex Mono" font-size="5.5" fill="#bf5f2b" opacity="0.6">R</text>
+                  <!-- decision label -->
+                  <text x="80" y="125" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.4">decision logic</text>
+                  <text x="80" y="136" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="currentColor" opacity="0.3">Tinkercad sim</text>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 Python Todo -->
+          <article class="project-card stagger-4">
+            <div class="project-inner reverse">
+              <div class="project-body">
+                <div class="project-num">04</div>
+                <h3>Python Todo List</h3>
+                <p class="project-kind">Individual Software Project</p>
+                <p class="project-desc">A command-line task manager written in Python with persistent .txt file storage. Supports adding, editing, deleting and searching tasks, with saved tasks reloaded automatically on start.</p>
+                <div class="tag-row">
+                  <span class="tag">Python</span>
+                  <span class="tag">File I/O</span>
+                  <span class="tag">CLI</span>
+                </div>
+                <div class="project-detail">
+                  <strong>Concepts demonstrated</strong>
+                  Functions · Loops · Conditional logic · File read/write · Menu-driven program structure
+                </div>
+                <div class="project-link-row">
+                  <a href="https://github.com/Siddhant981/todo-list-python" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                </div>
+              </div>
+              <div class="project-vis" aria-hidden="true">
+                <svg viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="10" width="140" height="120" rx="3" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                  <!-- title bar -->
+                  <rect x="10" y="10" width="140" height="18" rx="3" fill="currentColor" opacity="0.1"/>
+                  <circle cx="23" cy="19" r="3" fill="currentColor" opacity="0.2"/>
+                  <circle cx="33" cy="19" r="3" fill="currentColor" opacity="0.2"/>
+                  <circle cx="43" cy="19" r="3" fill="currentColor" opacity="0.2"/>
+                  <!-- content lines -->
+                  <text x="20" y="44" font-family="IBM Plex Mono" font-size="6.5" fill="#bf5f2b" opacity="0.7">$ python todo.py</text>
+                  <text x="20" y="57" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.4">1. Add task</text>
+                  <text x="20" y="68" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.4">2. Edit task</text>
+                  <text x="20" y="79" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.4">3. Delete task</text>
+                  <text x="20" y="90" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.4">4. Search tasks</text>
+                  <text x="20" y="101" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.4">5. Save &amp; exit</text>
+                  <text x="20" y="116" font-family="IBM Plex Mono" font-size="6.5" fill="currentColor" opacity="0.5">Choose: <tspan fill="#bf5f2b" opacity="0.7">_</tspan></text>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Robotics Club -->
+        <div style="margin-top: 56px;">
+          <div class="section-label" style="margin-bottom:10px;">Experience</div>
+          <h2 class="section-title" style="margin-bottom:20px;">Robotics Club</h2>
+          <div class="club-block">
+            <div class="club-left">
+              <div class="club-left-label">Technical</div>
+            </div>
+            <div class="club-right">
+              <h3>Technical Team Member</h3>
+              <p class="club-meta">100+ member college club</p>
+              <p class="club-desc">Technical team member involved in hands-on robotics activities, technical learning sessions, component research and supporting teammates during project development.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ SKILLS ══════════ -->
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-label">Tooling</div>
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-cols">
+          <div class="skill-col">
+            <div class="skill-col-label">Programming</div>
+            <ul class="skill-list" role="list">
+              <li>C / C++</li>
+              <li>Python</li>
+            </ul>
+          </div>
+          <div class="skill-col">
+            <div class="skill-col-label">Embedded &amp; Hardware</div>
+            <ul class="skill-list" role="list">
+              <li>Arduino</li>
+              <li>Sensors</li>
+              <li>Motors</li>
+              <li>Motor Drivers</li>
+              <li>PWM</li>
+              <li>QTR-8RC</li>
+              <li>Hardware Testing</li>
+              <li>Debugging</li>
+              <li>Sensor Calibration</li>
+            </ul>
+          </div>
+          <div class="skill-col">
+            <div class="skill-col-label">Tools</div>
+            <ul class="skill-list" role="list">
+              <li>Arduino IDE</li>
+              <li>Tinkercad</li>
+              <li>Git</li>
+              <li>GitHub</li>
+              <li>VS Code</li>
+              <li>Onshape</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Background</h2>
+        <div class="about-wrapper">
+          <div class="about-text">
+            <p>I'm a Computer Engineering student at Smt. Kashibai Navale College of Engineering in Pune, interested in robotics, embedded systems, automation, IoT and autonomous systems.</p>
+            <p>I prefer learning by doing — building something, testing it, finding what breaks, debugging it and iterating. Most of my practical experience so far has come through building projects and working within the Robotics Club, where hands-on work is the primary way I develop skills.</p>
+          </div>
+          <div class="about-visual">
+            <div class="about-loop">
+              <div>BUILD</div>
+              <div class="about-loop-arrow">↓</div>
+              <div>TEST</div>
+              <div class="about-loop-arrow">↓</div>
+              <div>DEBUG</div>
+              <div class="about-loop-arrow">↓</div>
+              <div>ITERATE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EDUCATION ══════════ -->
+    <section class="section" id="education">
+      <div class="wrap">
+        <div class="section-label">Background</div>
+        <h2 class="section-title">Education</h2>
+        <div class="edu-block">
+          <div>
+            <div class="edu-school">Smt. Kashibai Navale College of Engineering</div>
+            <div class="edu-sub">Sinhgad Vadgaon, Pune</div>
+            <div class="edu-chips">
+              <span class="chip">B.E. Computer Engineering</span>
+              <span class="chip">SPPU</span>
+              <span class="chip">3rd Semester</span>
+              <span class="chip">Expected 2029</span>
+              <span class="chip chip-accent">Sem 1 SGPA: 8.86</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CONTACT ══════════ -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <h2 class="contact-heading">Let's connect.</h2>
+        <p class="contact-sub">Interested in robotics, embedded systems, automation, or engineering projects?</p>
+        <div class="contact-links">
+          <a href="mailto:codeblox.dev@gmail.com" class="contact-card">
+            <span class="contact-card-label">Email</span>
+            <span class="contact-card-value">codeblox.dev@gmail.com</span>
+            <span class="contact-card-arrow">↗</span>
+          </a>
+          <a href="https://github.com/Siddhant981" class="contact-card" target="_blank" rel="noopener noreferrer">
+            <span class="contact-card-label">GitHub</span>
+            <span class="contact-card-value">github.com/Siddhant981</span>
+            <span class="contact-card-arrow">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/siddhant-hirave" class="contact-card" target="_blank" rel="noopener noreferrer">
+            <span class="contact-card-label">LinkedIn</span>
+            <span class="contact-card-value">linkedin.com/in/siddhant-hirave</span>
+            <span class="contact-card-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>Siddhant Hirave · Pune, India</div>
+      <div class="footer-status">
+        <span class="footer-status-dot"></span>
+        <span>Portfolio online</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Siddhant981" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/siddhant-hirave" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="Siddhant_Hirave_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+    </footer>
+  </div>
+
+  <script>
+    // ══════════ THEME MANAGEMENT ══════════
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setTheme(theme);
+    }
+
+    function setTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('theme', theme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    });
+
+    initTheme();
+
+    // ══════════ LOADING + INTRO SEQUENCE ══════════
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const loadingScreen = document.getElementById('loadingScreen');
+    const introOverlay = document.getElementById('introOverlay');
+
+    const revealPortfolio = () => {
+      if (introOverlay && !reducedMotion) {
+        introOverlay.classList.add('is-visible');
+        setTimeout(() => introOverlay.classList.add('is-finished'), 1550);
+      }
+      setTimeout(() => {
+        document.body.classList.add('is-loaded');
+      }, reducedMotion ? 180 : 1100);
+    };
+
+    if (!loadingScreen) {
+      revealPortfolio();
+    } else {
+      setTimeout(revealPortfolio, reducedMotion ? 150 : 300);
+    }
+
+    // ══════════ SPOTLIGHT AMBIENT EFFECT ══════════
+    const spotlightTarget = document.body;
+    const prefersFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+    if (prefersFinePointer && !reducedMotion) {
+      let spotlightX = 50;
+      let spotlightY = 50;
+      let targetX = 50;
+      let targetY = 50;
+      let rafId = null;
+
+      const updateSpotlight = () => {
+        spotlightX += (targetX - spotlightX) * 0.08;
+        spotlightY += (targetY - spotlightY) * 0.08;
+        spotlightTarget.style.setProperty('--spotlight-x', `${spotlightX}%`);
+        spotlightTarget.style.setProperty('--spotlight-y', `${spotlightY}%`);
+        rafId = requestAnimationFrame(updateSpotlight);
+      };
+
+      window.addEventListener('pointermove', (event) => {
+        const x = (event.clientX / window.innerWidth) * 100;
+        const y = (event.clientY / window.innerHeight) * 100;
+        targetX = x;
+        targetY = y;
+      });
+
+      updateSpotlight();
+    } else {
+      spotlightTarget.style.setProperty('--spotlight-x', '50%');
+      spotlightTarget.style.setProperty('--spotlight-y', '40%');
+      document.body.classList.add('is-loaded');
+    }
+
+    // ══════════ HIGHLIGHTED NAV PILL ══════════
+    const navCenter = document.getElementById('navCenter');
+    const navLinks = navCenter ? Array.from(navCenter.querySelectorAll('.nav-link')) : [];
+
+    function updateNavIndicator() {
+      if (!navCenter || navLinks.length === 0) return;
+      const activeLink = navLinks.find((link) => link.classList.contains('active')) || navLinks[0];
+      if (!activeLink) return;
+      navCenter.style.setProperty('--indicator-width', `${activeLink.offsetWidth}px`);
+      navCenter.style.setProperty('--indicator-x', `${activeLink.offsetLeft}px`);
+    }
+
+    function setActiveNavLink(link) {
+      if (!link) return;
+      navLinks.forEach((item) => item.classList.toggle('active', item === link));
+      updateNavIndicator();
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => setActiveNavLink(link));
+    });
+
+    const heroTabs = document.querySelectorAll('.hero-view-tab');
+    const heroPanels = document.querySelectorAll('.hero-panel');
+
+    heroTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+        heroTabs.forEach((item) => {
+          const active = item === tab;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-selected', String(active));
+        });
+        heroPanels.forEach((panel) => {
+          panel.classList.toggle('is-active', panel.dataset.panel === target);
+        });
+      });
+    });
+
+    // ══════════ SCROLL PROGRESS ══════════
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / docHeight) * 100;
+      scrollProgress.style.width = scrolled + '%';
+      document.body.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ══════════ ACTIVE NAV ══════════
+    function updateActiveNav() {
+      if (navLinks.length === 0) return;
+
+      const sections = [...document.querySelectorAll('section[id]')];
+      let activeId = '';
+      const scrollPoint = window.scrollY + 220;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollPoint >= sectionTop) {
+          activeId = section.getAttribute('id');
+        }
+      });
+
+      let nextActiveLink = navLinks[0];
+      if (activeId) {
+        nextActiveLink = navLinks.find((link) => link.getAttribute('href') === '#' + activeId) || nextActiveLink;
+      }
+
+      setActiveNavLink(nextActiveLink);
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('load', updateActiveNav);
+    updateActiveNav();
+
+    // ══════════ MOBILE NAV ══════════
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ══════════ KEYBOARD NAV ══════════
+    const navCenterLocal = document.getElementById('navCenter');
+    if (navCenterLocal) {
+      const centerLinks = navCenterLocal.querySelectorAll('a');
+      centerLinks.forEach((link, i) => {
+        link.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' && centerLinks[i + 1]) centerLinks[i + 1].focus();
+          if (e.key === 'ArrowLeft' && centerLinks[i - 1]) centerLinks[i - 1].focus();
+        });
+      });
+    }
+
+    window.addEventListener('load', () => {
+      updateNavIndicator();
+    });
+    window.addEventListener('resize', updateNavIndicator);
+  </script>
+
+</body>
+</html>
