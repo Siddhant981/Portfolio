@@ -1556,7 +1556,59 @@
       max-width: 60ch;
     }
 
+    .club-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .club-timeline::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 18px;
+      bottom: 18px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .club-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .club-step-marker {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 24px;
+    }
+
+    .club-step-marker::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(191, 95, 43, 0.08);
+    }
+
+    .club-step.current .club-step-marker::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(191, 95, 43, 0.12);
+    }
+
     @media (max-width: 560px) {
+      .club-timeline::before { left: 13px; }
+      .club-step { grid-template-columns: 26px 1fr; gap: 12px; }
+      .club-step-marker { padding-top: 20px; }
       .club-block { grid-template-columns: 1fr; }
       .club-left { border-right: none; border-bottom: 1px solid var(--line); padding: 20px; flex-direction: row; gap: 12px; }
       .club-left .club-icon { margin-bottom: 0; font-size: 1.2rem; }
@@ -2201,14 +2253,48 @@
         <div style="margin-top: 56px;">
           <div class="section-label" style="margin-bottom:10px;">Experience</div>
           <h2 class="section-title" style="margin-bottom:20px;">Robotics Club</h2>
-          <div class="club-block">
-            <div class="club-left">
-              <div class="club-left-label">Technical</div>
+
+          <div class="club-timeline">
+            <div class="club-step">
+              <div class="club-step-marker" aria-hidden="true"></div>
+              <div class="club-block">
+                <div class="club-left">
+                  <div class="club-left-label">Initial</div>
+                </div>
+                <div class="club-right">
+                  <h3>Technical Team Member</h3>
+                  <p class="club-meta">Foundation stage</p>
+                  <p class="club-desc">Started as a technical team member, learning through hands-on robotics activities, collaborative build sessions, and practical problem solving alongside teammates.</p>
+                </div>
+              </div>
             </div>
-            <div class="club-right">
-              <h3>Technical Team Member</h3>
-              <p class="club-meta">100+ member college club</p>
-              <p class="club-desc">Technical team member involved in hands-on robotics activities, technical learning sessions, component research and supporting teammates during project development.</p>
+
+            <div class="club-step">
+              <div class="club-step-marker" aria-hidden="true"></div>
+              <div class="club-block">
+                <div class="club-left">
+                  <div class="club-left-label">Selection</div>
+                </div>
+                <div class="club-right">
+                  <h3>Selected for Automation Department</h3>
+                  <p class="club-meta">Progression milestone</p>
+                  <p class="club-desc">Earned selection for the Automation Department by demonstrating consistency, technical interest, and the ability to contribute to more advanced automation-focused work.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="club-step current">
+              <div class="club-step-marker" aria-hidden="true"></div>
+              <div class="club-block">
+                <div class="club-left">
+                  <div class="club-left-label">Current</div>
+                </div>
+                <div class="club-right">
+                  <h3>Automation Team Member</h3>
+                  <p class="club-meta">Present role</p>
+                  <p class="club-desc">Currently contributing as an Automation Team Member, working on practical automation systems, debugging, iteration, and team-driven development in the club.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
